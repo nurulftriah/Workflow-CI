@@ -59,8 +59,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v7
         with:
-          context: ./Workflow-CI/MLProject
-          file: ./Workflow-CI/MLProject/Dockerfile
+          context: ./MLProject
+          file: ./MLProject/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/eksperimen-sml-nurul:latest
 
