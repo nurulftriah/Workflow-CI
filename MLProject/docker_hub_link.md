@@ -20,7 +20,7 @@ docker run nunuft/eksperimen-sml-nurul:latest
 
 | Key        | Value                                      |
 | ---------- | ------------------------------------------ |
-| Repository | nurulftriah/eksperimen-sml-nurul           |
+| Repository | nunuft/eksperimen-sml-nurul           |
 | Tag        | latest                                     |
 | Base Image | python:3.12-slim                           |
 | Deskripsi  | ML training image - Credit Scoring Project |
