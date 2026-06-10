@@ -25,7 +25,7 @@ DATA_PATH = os.path.join(
 
 df = pd.read_csv(DATA_PATH)
 
-TARGET = "loan_status"
+TARGET = "default"
 X = df.drop(columns=[TARGET])
 y = df[TARGET]
 
