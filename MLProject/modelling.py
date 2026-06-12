@@ -7,21 +7,18 @@ from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import accuracy_score, f1_score, roc_auc_score
 import os
 
-# ── Konfigurasi MLflow + DagsHub ────────────────────────────────────────────
+# ── Konfigurasi MLflow ──────────────────────────────────────────────────────
 DAGSHUB_USERNAME = os.getenv("DAGSHUB_USERNAME", "nurulftriah")
 DAGSHUB_REPO     = "Eksperimen_SML_Nurul-Fitriah"
-DAGSHUB_TOKEN    = os.getenv("DAGSHUB_TOKEN", "")
 
-TRACKING_URI = f"https://dagshub.com/{DAGSHUB_USERNAME}/{DAGSHUB_REPO}.mlflow"
+# Hanya set tracking URI jika tidak di-override dari luar (mlflow run)
+if not os.getenv("MLFLOW_TRACKING_URI"):
+    mlflow.set_tracking_uri(
+        f"https://dagshub.com/{DAGSHUB_USERNAME}/{DAGSHUB_REPO}.mlflow"
+    )
 
-# Set tracking URI + credentials via environment (agar mlflow run bisa baca)
-mlflow.set_tracking_uri(TRACKING_URI)
-
-# Set credentials programmatically agar tidak bergantung hanya pada env var
-os.environ["MLFLOW_TRACKING_USERNAME"] = DAGSHUB_USERNAME
-os.environ["MLFLOW_TRACKING_PASSWORD"] = DAGSHUB_TOKEN
-
-mlflow.set_experiment("credit-scoring-experiment")
+# JANGAN set_experiment() di sini — biar mlflow run yang handle
+# mlflow.set_experiment("credit-scoring-experiment")  ← dihapus
 
 # ── Load data preprocessing ─────────────────────────────────────────────────
 DATA_PATH = os.path.join(
